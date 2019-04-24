@@ -31,25 +31,10 @@ app.set("view engine", "handlebars");
 // Use the express.static middleware to serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
 
-// Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/scrapeyScrapes", { useNewUrlParser: true });
+// If deployed, use the deployed database. Otherwise use the local scrapey scrapes database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapeyScrapes";
 
-// Create an object containing dummy data to save to the database
-var data = {
-    title: "harry potter and the sorcerers stone",
-    link: "tee@hee.com"
-};
-
-// // Save a new Example using the data object
-// db.News.create(data)
-//     .then(function(moreData) {
-//         // If saved successfully, print the new Example document to the console
-//         console.log(moreData);
-//     })
-//     .catch(function(err) {
-//         // If an error occurs, log the error message
-//         console.log(err.message);
-// });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // here you need to use you api routes and stuff
 var controller = require("./controllers/html-routes");
