@@ -40,16 +40,16 @@ var data = {
     link: "tee@hee.com"
 };
 
-// Save a new Example using the data object
-db.News.create(data)
-    .then(function(moreData) {
-        // If saved successfully, print the new Example document to the console
-        console.log(moreData);
-    })
-    .catch(function(err) {
-        // If an error occurs, log the error message
-        console.log(err.message);
-});
+// // Save a new Example using the data object
+// db.News.create(data)
+//     .then(function(moreData) {
+//         // If saved successfully, print the new Example document to the console
+//         console.log(moreData);
+//     })
+//     .catch(function(err) {
+//         // If an error occurs, log the error message
+//         console.log(err.message);
+// });
 
 // here you need to use you api routes and stuff
 var controller = require("./controllers/html-routes");
