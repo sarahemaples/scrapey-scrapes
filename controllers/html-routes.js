@@ -67,7 +67,19 @@ router.get("/creepy", function(req, res) {
     });
     // console.log(req.body);
     res.send("Scrape complete");
+});
+
+// route for getting all the pastas fom the db
+router.get("/pastas", function(req, res) {
+  db.News.find({})
+    .then(function(dbPasta) {
+      // If we were able to successfully find Articles, send them back to the client
+      res.json(dbPasta)
+    })
+    .catch(function(err) {
+      res.json(err);
     });
+});
     
 
 module.exports = router;
