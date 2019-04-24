@@ -12,6 +12,11 @@ var NewsSchema = new Schema({
         type: String,
         required: true
     },
+    // `teaser` is required and of type String
+    teaser: {
+        type: String,
+        required: true
+    },
       // `link` is required and of type String
     link: {
         type: String,
