@@ -32,7 +32,7 @@ app.set("view engine", "handlebars");
 app.use(express.static("public"));
 
 // If deployed, use the deployed database. Otherwise use the local scrapey scrapes database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapeyScrapes";
+var MONGODB_URI = "u41nfnqdvpc84gscuo2ssjb7f@ds213896" || "mongodb://localhost/scrapeyScrapes";
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
