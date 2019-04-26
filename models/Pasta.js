@@ -4,9 +4,9 @@ var mongoose = require("mongoose");
 // Get a reference to the mongoose Schema constructor
 var Schema = mongoose.Schema;
 
-// Using the Schema constructor, create a new NewsSchema object
+// Using the Schema constructor, create a new PastaSchema object
 // This is similar to a Sequelize model
-var NewsSchema = new Schema({
+var PastaSchema = new Schema({
       // `title` is required and of type String
     title: {
         type: String,
@@ -21,11 +21,18 @@ var NewsSchema = new Schema({
     link: {
         type: String,
         required: true
+    },
+    // `note` is an object that stores a Note id
+    // The ref property links the ObjectId to the Note model
+    // This allows us to populate the Article with an associated Note
+    note: {
+        type: Schema.Types.ObjectId,
+        ref: "Notes"
     }
 })
 
 // This creates our model from the above schema, using mongoose's model method
-var News = mongoose.model("News", NewsSchema);
+var Pasta = mongoose.model("Pasta", PastaSchema);
 
-// Export the News model
-module.exports = News;
+// Export the Pasta model
+module.exports = Pasta;
