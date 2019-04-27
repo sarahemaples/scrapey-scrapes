@@ -43,8 +43,6 @@ router.get("/scrape", function(req, res) {
         // save the link from the title
         creepyPasta.link = $(element).children("h3.post-title").children().attr("href");
 
-        // db.Pasta.createIndex( { "title": 1 },  )
-
         // create a new Pasta using the object we just built
         db.Pasta.create(creepyPasta)
           .then(function(dbPasta) {
@@ -55,17 +53,7 @@ router.get("/scrape", function(req, res) {
             // If an error occurred, log it
             console.log(err);
           });
-    
-        // // Make an object with data we scraped for this h4 and push it to the results array
-        // results.push({
-        //   title: title,
-        //   teaser: teaser,
-        //   link: link
-        // });
       });
-    
-      // After looping through each h4.headline-link, log the results
-      // console.log(results);
     });
     // console.log(req.body);
     res.send("Scrape complete");
@@ -102,14 +90,13 @@ router.get("/pastas/:id", function(req, res) {
 router.post("/pastas/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
   db.Notes.create({
-    title: "test",
-    body: "teehee"
+    body: req.body.body
   })
-  .then(function(dbNote) {
-    // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
-    // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
-    // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-    return db.Pasta.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+    .then(function(dbNote) {
+      // If a Note was created successfully, find one pasta with an `_id` equal to `req.params.id`. Update the pasta to be associated with the new Note
+      // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
+      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      return db.Pasta.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
   })
   .then(function(dbPasta) {
     // If we were able to successfully update an Article, send it back to the client
@@ -120,6 +107,5 @@ router.post("/pastas/:id", function(req, res) {
     res.json(err);
   });
 })
-    
 
 module.exports = router;
